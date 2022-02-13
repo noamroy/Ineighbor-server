@@ -1,0 +1,561 @@
+{
+	"info": {
+		"_postman_id": "a1ce7266-a133-46fb-aea2-2bc1e207b2ab",
+		"name": "Ineighbor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Api",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Noam\",\r\n    \"password\": \"1234\",\r\n    \"group\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Noam\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/user/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "systems",
+			"item": [
+				{
+					"name": "get all systems",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/neighborhoodsystem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhoodsystem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/neighborhoodsystem/9",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhoodsystem",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create system",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"streetLights\",\r\n    \"name\": \"Yeda Ham Lights\",\r\n    \"address\": \"Yeda Ham, Ramat Gan,Israel\",\r\n    \"ip\": \"30.0.0.1\",\r\n    \"mode\": \"auto\",\r\n    \"program\": 1,\r\n    \"group\": 11111\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/neighborhoodsystem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhoodsystem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update system",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ip\": \"30.0.0.2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/neighborhoodsystem/9",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhoodsystem",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete system",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/neighborhoodsystem/9",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"neighborhoodsystem",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "programs",
+			"item": [
+				{
+					"name": "get all programs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/program",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"program"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific program",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/program/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"program",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new program",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"on sunset off sunrise\",\r\n    \"startSource\": \"sunset\",\r\n    \"startDelay\": 0,\r\n    \"finishSource\": \"sunrise\",\r\n    \"finishDelay\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/program",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"program"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update program",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"on 0800 off 1000\",\r\n    \"startSource\": \"localtime\",\r\n    \"startDelay\": 600,\r\n    \"finishSource\": \"localtime\",\r\n    \"finishDelay\": 1200\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/program/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"program",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete program",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/program/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"program",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/program/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"program",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sundata",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJfaWQiOiI2MjA3YTgzMmIyNGE5MzAzNzc1MTdkYjkiLCJpZCI6NCwibmFtZSI6Ik5vYW0iLCJwYXNzd29yZCI6IjEyMzQiLCJncm91cCI6MCwiX192IjowfSwiaWF0IjoxNjQ0NjY5NzUyLCJleHAiOjE2NDQ2NzY5NTJ9.uPL8t0oKdWn79Iej-I3Wm0XS_JM9rcJSW-5nTFjXVP8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/program/sun",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"program",
+								"sun"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
