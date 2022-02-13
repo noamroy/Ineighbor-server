@@ -45,7 +45,7 @@ exports.usersController = {
         Log.logger.info(`REGISTER SYSTEM CONTROLLER REQ: POST add a new user`);
         const body = req.body;
         var userId = 0;
-        if (body.name && body.password && (Number.isInteger(body.group))){
+        if (body.name && body.password ){
             const name_duplicate = await User.find({name: body.name})
                 .catch(err => {
                     Log.logger.info(`REGISTER SYSTEM CONTROLLER ERROR: Database retriving error`);
