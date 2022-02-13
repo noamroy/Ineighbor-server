@@ -125,16 +125,18 @@ exports.neighborhoodSystemController = {
                 if (body.address)
                 newNeighborhoodSystem.address=body.address;
                 if (body.ip){
-                    const ip_duplicate = await NeighborhoodSystem.find({ip: body.ip})
-                        .catch(err => {
-                            Log.logger.info(`NEIGHBORHOOD SYSTEM CONTROLLER ERROR: Database retriving error`);
-                            res.status(503).json({ "status": 503, "msg": `Database retriving error` });
+                    if (body.ip != newNeighborhoodSystem.ip){
+                        const ip_duplicate = await NeighborhoodSystem.find({ip: body.ip})
+                            .catch(err => {
+                                Log.logger.info(`NEIGHBORHOOD SYSTEM CONTROLLER ERROR: Database retriving error`);
+                                res.status(503).json({ "status": 503, "msg": `Database retriving error` });
+                                return;
+                            });
+                        if (ip_duplicate.length!=0){
+                            Log.logger.info(`NEIGHBORHOOD SYSTEM CONTROLLER ERROR: IP already exists`);
+                            res.status(400).json({ "status": 400, "msg": `IP already exists` });
                             return;
-                        });
-                    if (ip_duplicate.length!=0){
-                        Log.logger.info(`NEIGHBORHOOD SYSTEM CONTROLLER ERROR: IP already exists`);
-                        res.status(400).json({ "status": 400, "msg": `IP already exists` });
-                        return;
+                        }
                     }
                     newNeighborhoodSystem.ip=body.ip;
                 }

@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken');
 /*
 POST REQUEST: loginUser() (body = name and pass params)
 POST REQUEST: registerUser() (body = name pass group params)
+PUT REQUEST: updateUser() (body = group param)
+GET REQUEST: getAllUsers()
 */
 exports.usersController = {
     async loginUser(req, res) {
@@ -85,6 +87,82 @@ exports.usersController = {
             Log.logger.info(`REGISTER SYSTEM CONTROLLER ERROR: no Valid input`);
             res.status(401).json({ "status": 401, "msg": `Please enter valid data` });
         }
-
-    }
+    },
+    async updateUser(req, res) {
+        const header = req.headers['authorization'];
+        if(typeof header !== 'undefined') {
+            const bearer = header.split(' ');
+            const token = bearer[1];
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g,'+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            const tokenGroup= (JSON.parse(jsonPayload)).userData.group;
+            if (tokenGroup !== 0){
+                Log.logger.info('AUTHORIZED ERROR: the authorization fail');
+                res.status(403).json({status: 403 , msg: `forbidden`});
+                return;
+            }
+        } else {
+            Log.logger.info('AUTHORIZED ERROR: the authorization field is empty');
+            res.status(403).json({status: 403 , msg: `forbidden`});
+            return;
+        }
+        const userId = req.path.substring(1);
+        Log.logger.info(`Update User CONTROLLER REQ: PUT edit a user id:${userId}`);
+        if (isNaN(userId)){
+            Log.logger.info(`Update User CONTROLLER RES: input is nan error "${userId}"`);
+            res.status(400).json({status: 400 , msg: `Input is nan error "${userId}"`});
+        } else {
+            const body = req.body;
+            var newUser = await User.find({ id: Number(userId)})
+                .catch(err => {
+                    Log.logger.info(`Update User CONTROLLER ERROR: getting the data from db ${err}`);
+                    res.status(500).json({status: 500 , msg: `Server error`});
+                });
+            if (newUser.length == 0){
+                Log.logger.info(`Update User CONTROLLER CONTROLLER RES: Didn't find user number: ${userId}`);
+                res.status(404).json({status: 404 , msg: `Didn't find user number: "${userId}"`});
+            }
+            else {
+                newUser = newUser[0];
+                /*if (body.name)
+                    newUser.name=body.name;*/       //INVALID
+                if (body.group)
+                    newUser.group=body.group;
+                /*if (body.password)
+                    newUser.password=body.password;*/  //INVALID
+                User.updateOne({ id: userId }, {
+                    //name: newUser.name,               //INVALID
+                    //password: newUser.password,       //INVALID
+                    group: newUser.group
+                })  .catch(err => {
+                        Log.logger.info(`Update User CONTROLLER ERROR: ${err}`);
+                        res.status(500).json({status: 500 , msg: `Error update an user: ${err}`});
+                    });
+                res.json(newUser);
+            }
+        }
+    },
+    async getAllUsers(req, res) {
+        Log.logger.info(`User CONTROLLER REQ: Get all users`);
+        const answer = await User.find()
+            .catch(err => {
+                Log.logger.info(`USER CONTROLLER ERROR: getting the data from db ${err}`);
+                res.status(500).json({status: 500 , msg: `Server error`});
+            });
+        for (let index = 0; index < answer.length; index++) {       //CLEAN PASS FIELD
+            const element = answer[index];
+            answer.password = "PPPPPPPP";            
+        }
+        if (answer.length!=0){
+            Log.logger.info(`PROGRAM CONTROLLER RES: Get all users`);
+            res.json(answer);
+        }
+        else{
+            Log.logger.info(`PROGRAM CONTROLLER RES: no users in DB`);
+            res.status(404).json({status: 404 , msg: `No users in DB`});
+        }
+    },
 };
