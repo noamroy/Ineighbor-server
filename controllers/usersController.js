@@ -26,7 +26,7 @@ exports.usersController = {
                     jwt.sign({userData}, 'privatekey', { expiresIn: '120m'},(err, token) => {
                         if (err) {Log.logger(err) };
                         Log.logger.info(`Login SYSTEM CONTROLLER RES: Succesfull login: ${userData.name}`);
-                        res.status(200).json({ "status": 200, "msg": `Succesfull login: ${userData.name}`,"group":`${userData.group}`,"id":`${userData.id}`,"token":token});        
+                        res.status(200).json({ "status": 200, "msg": "Succesfull login", "name": userData.name,"group":userData.group,"id":userData.id,"token":token});        
                     });                    
                 } else {
                     Log.logger.info(`Login SYSTEM CONTROLLER ERROR: Failed login attempt: ${userData.id}`);
