@@ -29,9 +29,9 @@ async function sunApi(_lat, _lng, _date, _timezone=0){
 GET REQUEST: getAllPrograms()
 GET REQUEST: getSpecificProgram(path = '/id')
 POST REQUEST: createProgram(body = all params except for id)
+PUT REQUEST: updateStatus()
 PUT REQUEST: updateProgram(path = '/id', body = all new params)
 DELETE REQUEST: deleteProgram(path = '/id')
-PATCH REQUEST: updateStatus()
 GET REQUEST: getSun(_lat, _lng, _date) (path= '/sun')
 */
 exports.programController = {
