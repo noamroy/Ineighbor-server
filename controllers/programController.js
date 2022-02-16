@@ -259,11 +259,6 @@ exports.programController = {
                 
             }
             Log.logger.info(`PROGRAM CONTROLLER RES: UPDATE all programs`);
-            answer = await Program.find()
-            .catch(err => {
-                Log.logger.info(`PROGRAM CONTROLLER ERROR: getting the data from db ${err}`);
-                res.status(500).json({status: 500 , msg: `Server error`});
-            });
             res.status(200).json({status: 200 , msg: `UPDATE STATUS SUCCESS`});
         }
         else{
