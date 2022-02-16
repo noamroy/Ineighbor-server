@@ -92,7 +92,7 @@ exports.programController = {
         else
             ProgramId=1;
         if (body.name && body.startSource &&
-            Number.isInteger(body.startDelay) && body.finishSource && Number.isInteger(body.finishDelay)){
+            body.startDelay && body.finishSource && body.finishDelay){
                 const newProgram = new Program({
                     "name": body.name,
                     "startSource": body.startSource,
