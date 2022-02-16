@@ -129,7 +129,7 @@ exports.usersController = {
                 newUser = newUser[0];
                 /*if (body.name)
                     newUser.name=body.name;*/       //INVALID
-                if (body.group)
+                if (body.group!=newUser.group)
                     newUser.group=body.group;
                 /*if (body.password)
                     newUser.password=body.password;*/  //INVALID
@@ -140,7 +140,7 @@ exports.usersController = {
                 })  .catch(err => {
                         Log.logger.info(`Update User CONTROLLER ERROR: ${err}`);
                         res.status(500).json({status: 500 , msg: `Error update an user: ${err}`});
-                    });
+                });
                 res.json(newUser);
             }
         }
