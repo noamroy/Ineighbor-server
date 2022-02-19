@@ -46,6 +46,9 @@ async function updateStatus(){
         const sunRise = new Date(sunData.sunrise).getHours()*60+new Date(sunData.sunrise).getMinutes();
         const sunSet = new Date(sunData.sunset).getHours()*60+new Date(sunData.sunset).getMinutes();
         var currentTime = new Date().getHours()*60+new Date().getMinutes();
+        console.log (`current time is: ${currentTime}`);
+        console.log (`sunrise is: ${sunRise}`);
+        console.log (`sunset is: ${sunSet}`);
         for (let index = 0; index < answer.length; index++) {
             var startTime = 0;
             var finishTime = 0;
@@ -57,6 +60,7 @@ async function updateStatus(){
                 startTime = sunSet;
             }
             startTime = (startTime+element.startDelay)%(24*60);
+            console.log(`program number ${element.id} start time: ${startTime}`);
             if (element.finishSource=="sunrise"){
                 finishTime = sunRise;
             }
@@ -64,13 +68,15 @@ async function updateStatus(){
                 finishTime = sunSet;
             }
             finishTime = (finishTime+element.finishDelay)%(24*60);
+            console.log(`program number ${element.id} finish time: ${finishTime}`);
             if (finishTime>startTime){
                 if (currentTime>startTime && currentTime<finishTime){
+                    console.log(`program number ${element.id} turn on1`);
                     Program.updateOne({ id: element.id }, {
                         currentStatus: true
                     }) .catch(err => {
-                        console.log(`Error update a program ${err}`);
-                        return;
+                    console.log(`Error update a program ${err}`);
+                    return;
                     });
                 } else {
                     console.log(`program number ${element.id} turn off1`);
