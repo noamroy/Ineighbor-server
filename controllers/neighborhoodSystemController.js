@@ -1,6 +1,7 @@
 //~~~~~~~~~INCLUDES~~~~~~~~~~~~
 const NeighborhoodSystem = require('../models/neighborhoodSystem');
 const Program = require('../models/programs');
+const axios = require('axios');
 const Log = require('./logger');
 //~~~~~~~EXPORTED FUNCTIONS~~~~~~~~~~
 /*
@@ -11,6 +12,27 @@ PATCH REQUEST: updateNeighborhoodSystem(path = '/id', body = all new params)
 DELETE REQUEST: deleteNeighborhoodSystem(path = '/id')
 */
 //UPDATE INNER FUNCTION~~~~~~
+async function sunApi(_lat, _lng, _date, _timezone=0){
+    Log.logger.info(`SUN API REQ: lat ${_lat} long ${_lng} date ${_date} timezone ${_timezone}`);
+    const response = await axios.get('https://api.sunrise-sunset.org/json', { 
+        params: {
+            lat: _lat,
+            lng: _lng,
+            date: _date,
+            formatted: 0 }
+    });
+    const responseData = response.data;
+    Log.logger.info(`API RES: GET ANSWER ${JSON.stringify(responseData)}`);
+    var localTimeRise = new Date(responseData.results.sunrise);
+    localTimeRise = new Date(localTimeRise.setHours((localTimeRise.getHours())+_timezone));
+    var localTimeSet = new Date(responseData.results.sunset);
+    localTimeSet = new Date(localTimeSet.setHours((localTimeSet.getHours())+_timezone));
+    var sunData = { status: responseData.status,
+                    sunrise: localTimeRise,
+                    sunset: localTimeSet};
+                    Log.logger.info(`API SUNRISE RES: status-${sunData.status} sunrise-${sunData.sunrise} sunset-${sunData.sunset}`);
+    return sunData;
+}
 async function updateStatus(){
     const answer = await Program.find()
     .catch(err => {
