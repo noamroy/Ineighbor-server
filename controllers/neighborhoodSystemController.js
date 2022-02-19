@@ -1,5 +1,6 @@
 //~~~~~~~~~INCLUDES~~~~~~~~~~~~
 const NeighborhoodSystem = require('../models/neighborhoodSystem');
+const Program = require('../models/programs');
 const Log = require('./logger');
 //~~~~~~~EXPORTED FUNCTIONS~~~~~~~~~~
 /*
@@ -9,6 +10,83 @@ POST REQUEST: createNeighborhoodSystem(body = all params except for id)
 PATCH REQUEST: updateNeighborhoodSystem(path = '/id', body = all new params)
 DELETE REQUEST: deleteNeighborhoodSystem(path = '/id')
 */
+//UPDATE INNER FUNCTION~~~~~~
+async function updateStatus(){
+    const answer = await Program.find()
+    .catch(err => {
+        Log.logger.info(`PROGRAM CONTROLLER ERROR: getting the data from db ${err}`);
+    });
+    if (answer.length!=0){
+        const _lat=32.11;
+        const _lng=34.86;
+        const _date="today";
+        const sunData = await sunApi(_lat, _lng, _date);
+        const sunRise = new Date(sunData.sunrise).getHours()*60+new Date(sunData.sunrise).getMinutes();
+        const sunSet = new Date(sunData.sunset).getHours()*60+new Date(sunData.sunset).getMinutes();
+        var currentTime = new Date().getHours()*60+new Date().getMinutes();
+        for (let index = 0; index < answer.length; index++) {
+            var startTime = 0;
+            var finishTime = 0;
+            const element = answer[index];
+            if (element.startSource=="sunrise"){
+                startTime = sunRise;
+            }
+            else if (element.startSource=="sunset"){
+                startTime = sunSet;
+            }
+            startTime = (startTime+element.startDelay)%(24*60);
+            if (element.finishSource=="sunrise"){
+                finishTime = sunRise;
+            }
+            else if (element.finishSource=="sunset"){
+                finishTime = sunSet;
+            }
+            finishTime = (finishTime+element.finishDelay)%(24*60);
+            if (finishTime>startTime){
+                if (currentTime>startTime && currentTime<finishTime){
+                    Program.updateOne({ id: element.id }, {
+                        currentStatus: true
+                    }) .catch(err => {
+                        console.log(`Error update a program ${err}`);
+                        return;
+                    });
+                } else {
+                    console.log(`program number ${element.id} turn off1`);
+                    Program.updateOne({ id: element.id }, {
+                        currentStatus: false
+                    }) .catch(err => {
+                        console.log(`ERROR: update program ${err}`);
+                        return;
+                    });
+                }
+            } else {
+                if (currentTime<startTime && currentTime>finishTime){
+                    console.log(`program number ${element.id} turn off2`);
+                    Program.updateOne({ id: element.id }, {
+                        currentStatus: false
+                    }) .catch(err => {
+                        console.log(`ERROR: update program ${err}`);
+                        return;
+                    });
+                } else {
+                    console.log(`program number ${element.id} turn on2`);
+                    Program.updateOne({ id: element.id }, {
+                        currentStatus: true
+                    }) .catch(err => {
+                        console.log(`update program ${err}`);
+                        return;
+                    });  
+                }
+            }
+                
+        }
+        console.log(`UPDATE all programs`);
+    }
+    else{
+        console.log(`no programs in DB`);
+    }
+}               
+//~~~~~~~EXPORTED FUNCTIONS
 exports.neighborhoodSystemController = {
     async getAllNeighborhoodSystems(req, res) {
         Log.logger.info(`NEIGHBORHOOD SYSTEM CONTROLLER REQ: Get all neighborhood systems`);
@@ -18,6 +96,7 @@ exports.neighborhoodSystemController = {
                 res.status(500).json({status: 500 , msg: `Server error`});
             });
         if (answer.length!=0){
+            await updateStatus();
             Log.logger.info(`NEIGHBORHOOD SYSTEM CONTROLLER RES: Get all neighborhood systems`);
             res.json(answer);
         }
