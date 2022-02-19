@@ -45,9 +45,11 @@ async function updateStatus(){
         const sunData = await sunApi(_lat, _lng, _date);
         const currentTimeAnswer = await axios.get('http://worldtimeapi.org/api/timezone/Asia/Jerusalem', {
         });
-        console.log (currentTimeAnswer.data.utc_datetime);
-        const currentTimeAnswerDate= new Date(currentTimeAnswer.data.utc_datetime);
-        const currentTime = currentTimeAnswerDate.getHours()*60+currentTimeAnswerDate.getMinutes();
+        console.log (currentTimeAnswer.data.datetime);
+        const currentTimeAnswerDate= new Date(currentTimeAnswer.data.datetime);
+        const userTimezoneOffset = currentTimeAnswerDate.getTimezoneOffset() * 60000;
+        const currentTimeOffset = new Date(currentTimeAnswerDate.getTime() - userTimezoneOffset);
+        const currentTime =  currentTimeOffset.getHours()*60+ currentTimeOffset.getMinutes();
         const sunRise = new Date(sunData.sunrise).getHours()*60+new Date(sunData.sunrise).getMinutes();
         const sunSet = new Date(sunData.sunset).getHours()*60+new Date(sunData.sunset).getMinutes();
         console.log (`current time is: ${currentTime}`);
